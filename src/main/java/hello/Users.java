@@ -1,19 +1,24 @@
 package hello;
 
 
+import java.util.HashMap;
+
 public class Users {
 
-    private final String name;
-    private int age;
-    private final String username;
-    private byte[] password;
+    private HashMap<String, userInformation> accounts = new HashMap<>();
 
-    public Users(String name, int age, String username, byte[] password)
+
+    public boolean createAccount(String username, byte[] password, String name, int age)
     {
-        this.name = name;
-        this.age = age;
-        this.username = username;
-        this.password = password;
+        if (!accounts.containsKey(username))
+        {
+            userInformation _userInformation = new userInformation(password, name, age);
+            accounts.put(username, _userInformation);
+            return true;
+        }
+        else
+            return false;
+
     }
 
 }
