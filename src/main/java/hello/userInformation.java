@@ -6,11 +6,11 @@ import java.util.ArrayList;
 public class userInformation {
     private String name;
     private int age;
-    private byte[] password;
+    private String password;
     private int points = 0;
     private ArrayList<String> friendsList = new ArrayList<>();
 
-    public userInformation(byte[] password, String name, int age) {
+    public userInformation(String password, String name, int age) {
         this.name = name;
         this.age = age;
         this.password = password;
@@ -29,7 +29,7 @@ public class userInformation {
         points += newPoints;
     }
 
-    public int checkPoints()
+    public int getPoints()
     {
         return points;
     }
@@ -37,6 +37,11 @@ public class userInformation {
     public void addFriend(String newFriend)
     {
         friendsList.add(newFriend);
+    }
+
+    public String getPassword()
+    {
+        return password;
     }
 }
 

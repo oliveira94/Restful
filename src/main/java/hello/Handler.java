@@ -1,5 +1,6 @@
 package hello;
 
+import org.omg.CORBA.Object;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,15 +16,21 @@ public class Handler {
     //If it returns false   -> Username already exists!
     @RequestMapping("/create")
     public boolean createAccount(@RequestParam(value="username") String username, @RequestParam(value="name") String name,
-                          @RequestParam(value="age") int age, @RequestParam(value="password") byte[] password)
+                          @RequestParam(value="age") int age, @RequestParam(value="password") String password)
     {
         return users.createAccount(username, password, name, age);
     }
 
     @RequestMapping("/checkPoints")
-    public int checkPoints(@RequestParam(value="username") String username)
+    public int getPoints(@RequestParam(value="username") String username)
     {
-        return users.checkPoints(username);
+        return users.getPoints(username);
+    }
+
+    @RequestMapping("/logIn")
+    public String logIn(@RequestParam(value="username") String username)
+    {
+        return users.logIn(username);
     }
 
     @RequestMapping("/addPoints")
@@ -32,10 +39,18 @@ public class Handler {
         users.addPoints(username, newPoints);
     }
 
-    @RequestMapping("/test")
-    public String test()
+    @RequestMapping("/addFriend")
+    public void addFriend(@RequestParam(value="username") String username, @RequestParam(value="newFriend") String newFriend)
     {
-        return "it Works!";
+        users.addFriend(username, newFriend);
     }
+
+    @RequestMapping("/getProfile")
+    public userInformation getProfile(@RequestParam(value="username") String username)
+    {
+        return users.getProfile(username);
+    }
+
+
 
 }

@@ -8,7 +8,7 @@ public class Users {
     private HashMap<String, userInformation> accounts = new HashMap<>();
 
 
-    public boolean createAccount(String username, byte[] password, String name, int age)
+    public boolean createAccount(String username, String password, String name, int age)
     {
         if (!accounts.containsKey(username))
         {
@@ -23,11 +23,11 @@ public class Users {
 
 
     //Function to check the points that the user currently has
-    public int checkPoints(String username)
+    public int getPoints(String username)
     {
         if (accounts.containsKey(username))
         {
-            return accounts.get(username).checkPoints();
+            return accounts.get(username).getPoints();
         }
         else
         {
@@ -61,6 +61,28 @@ public class Users {
             return false;
         }
     }
-    
+
+    public userInformation getProfile(String username)
+    {
+        return accounts.get(username);
+    }
+
+    public String logIn(String username)
+    {
+        String result = "noUsername";
+
+        if(!accounts.containsKey(username))
+        {
+            result = "true:";
+            result += accounts.get(username).getName() + ":";
+            result += accounts.get(username).getPassword() + ":";
+            result += accounts.get(username).getPoints() + ":";
+            result += accounts.get(username).getAge();
+            return result;
+        }
+        else
+            return result;
+    }
+
 
 }
