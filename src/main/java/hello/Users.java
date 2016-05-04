@@ -71,10 +71,9 @@ public class Users {
     {
         String result = "noUsername";
 
-        if(!accounts.containsKey(username))
+        if(accounts.containsKey(username))
         {
-            result = "true:";
-            result += accounts.get(username).getName() + ":";
+            result = accounts.get(username).getName() + ":";
             result += accounts.get(username).getPassword() + ":";
             result += accounts.get(username).getPoints() + ":";
             result += accounts.get(username).getAge();
