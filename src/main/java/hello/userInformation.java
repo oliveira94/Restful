@@ -8,6 +8,7 @@ public class userInformation {
     private int age;
     private String password;
     private int points = 0;
+    private double Kilometers=0;
     private ArrayList<String> friendsList = new ArrayList<>();
 
     public userInformation(String password, String name, int age) {
@@ -32,6 +33,14 @@ public class userInformation {
     public int getPoints()
     {
         return points;
+    }
+    public void setKilometers(double kilo)
+    {
+        Kilometers= kilo;
+    }
+    public double getKilometers()
+    {
+        return Kilometers;
     }
 
     public void addFriend(String newFriend)
