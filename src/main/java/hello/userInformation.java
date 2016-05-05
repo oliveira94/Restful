@@ -1,6 +1,9 @@
 package hello;
 
 
+import com.google.gson.Gson;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class userInformation {
@@ -43,6 +46,14 @@ public class userInformation {
     {
         return password;
     }
+
+    public String getFriendsList()
+    {
+        Gson gson = new Gson();
+        String friendsString = gson.toJson(friendsList);
+        return friendsString;
+    }
+
 }
 
 //-Dspring.profiles.active=https

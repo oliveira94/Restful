@@ -1,6 +1,7 @@
 package hello;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Users {
@@ -21,7 +22,6 @@ public class Users {
 
     }
 
-
     //Function to check the points that the user currently has
     public int getPoints(String username)
     {
@@ -36,7 +36,6 @@ public class Users {
         }
     }
 
-
     //Function to add points to the user account
     public void addPoints(String username, int newPoints)
     {
@@ -49,7 +48,6 @@ public class Users {
             System.err.println("Username does not exist in database!");
         }
     }
-
 
     //Function to add a new friend to their list
     public boolean addFriend(String username, String newFriend)
@@ -83,5 +81,9 @@ public class Users {
             return result;
     }
 
+    public String getFriendsList(String username)
+    {
+        return accounts.get(username).getFriendsList();
+    }
 
 }
