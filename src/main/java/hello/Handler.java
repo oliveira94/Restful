@@ -52,16 +52,16 @@ public class Handler {
     {
         return users.getProfile(username);
     }
-    @RequestMapping("/setKilometers")
-    public  void setKilometers(@RequestParam("username") String username,@RequestParam(value="kilometers") double Kilometers)
+    @RequestMapping("/addDistance")
+    public  void setDistance(@RequestParam("username") String username,@RequestParam(value="newDistance") double newDistance)
     {
-        users.setKilometers(username,Kilometers);
+        users.addDistance(username,newDistance);
     }
 
-    @RequestMapping("/getKilometers")
-    public double getKilometers(@RequestParam("username") String username)
+    @RequestMapping("/getDistance")
+    public double getDistance(@RequestParam("username") String username)
     {
-        return users.getKilometers(username);
+        return users.getDistance(username);
     }
 
     @RequestMapping("/getFriends")

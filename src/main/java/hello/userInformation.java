@@ -11,7 +11,7 @@ public class userInformation {
     private int age;
     private String password;
     private int points = 0;
-    private double Kilometers=0;
+    private double distance = 0;
     private ArrayList<String> friendsList = new ArrayList<>();
 
     public userInformation(String password, String name, int age) {
@@ -37,13 +37,14 @@ public class userInformation {
     {
         return points;
     }
-    public void setKilometers(double kilo)
+
+    public void setDistance(double distance)
     {
-        Kilometers= kilo;
+        this.distance = distance;
     }
-    public double getKilometers()
+    public double getDistance()
     {
-        return Kilometers;
+        return distance;
     }
 
     public void addFriend(String newFriend)

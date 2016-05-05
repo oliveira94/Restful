@@ -38,19 +38,21 @@ public class Users {
 
 
     //function to add kilometers on the database
-    public void setKilometers(String username , double Kilometers)
+    public void addDistance(String username , double newDistance)
     {
         if (accounts.containsKey(username))
         {
-            double aux= accounts.get(username).getKilometers();
-            aux+= Kilometers;
-            accounts.get(username).setKilometers(aux);
-        }else {System.err.println("Wrong operation");}
+            double distance = accounts.get(username).getDistance();
+            distance += newDistance;
+            accounts.get(username).setDistance(distance);
+        }
+        else
+            System.err.println("Wrong operation");
     }
 
-    public double getKilometers(String username)
+    public double getDistance(String username)
     {
-        return accounts.get(username).getKilometers();
+        return accounts.get(username).getDistance();
     }
 
 
