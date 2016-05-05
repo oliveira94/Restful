@@ -3,16 +3,18 @@ package hello;
 
 import com.google.gson.Gson;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class userInformation {
+
     private String name;
     private int age;
     private String password;
     private int points = 0;
     private double distance = 0;
     private ArrayList<String> friendsList = new ArrayList<>();
+
 
     public userInformation(String password, String name, int age) {
         this.name = name;
@@ -59,9 +61,14 @@ public class userInformation {
 
     public String getFriendsList()
     {
-        Gson gson = new Gson();
-        String friendsString = gson.toJson(friendsList);
-        return friendsString;
+        if(friendsList.isEmpty())
+            return "noFriends";
+        else
+        {
+            Gson gson = new Gson();
+            String friendsString = gson.toJson(friendsList);
+            return friendsString;
+        }
     }
 
 }

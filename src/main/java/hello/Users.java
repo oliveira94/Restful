@@ -71,14 +71,15 @@ public class Users {
     }
 
     //Function to add a new friend to their list
-    public boolean addFriend(String username, String newFriend)
+    public String addFriend(String username, String newFriend)
     {
-        try {
+        if(accounts.containsKey(newFriend))
+        {
             accounts.get(username).addFriend(newFriend);
-            return true;
-        }catch (Exception e){
-            return false;
+            return "true";
         }
+        else
+            return "false";
     }
 
     public userInformation getProfile(String username)

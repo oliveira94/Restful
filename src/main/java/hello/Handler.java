@@ -23,16 +23,16 @@ public class Handler {
         return users.createAccount(username, password, name, age);
     }
 
-    @RequestMapping("/checkPoints")
-    public int getPoints(@RequestParam(value="username") String username)
-    {
-        return users.getPoints(username);
-    }
-
     @RequestMapping("/logIn")
     public String logIn(@RequestParam(value="username") String username)
     {
         return users.logIn(username);
+    }
+
+    @RequestMapping("/getProfile")
+    public userInformation getProfile(@RequestParam(value="username") String username)
+    {
+        return users.getProfile(username);
     }
 
     @RequestMapping("/addPoints")
@@ -41,33 +41,33 @@ public class Handler {
         users.addPoints(username, newPoints);
     }
 
+    @RequestMapping("/checkPoints")
+    public int getPoints(@RequestParam(value="username") String username)
+    {
+        return users.getPoints(username);
+    }
+
     @RequestMapping("/addFriend")
-    public void addFriend(@RequestParam(value="username") String username, @RequestParam(value="newFriend") String newFriend)
+    public String addFriend(@RequestParam(value="username") String username, @RequestParam(value="newFriend") String newFriend)
     {
-        users.addFriend(username, newFriend);
-    }
-
-    @RequestMapping("/getProfile")
-    public userInformation getProfile(@RequestParam(value="username") String username)
-    {
-        return users.getProfile(username);
-    }
-    @RequestMapping("/addDistance")
-    public  void setDistance(@RequestParam("username") String username,@RequestParam(value="newDistance") double newDistance)
-    {
-        users.addDistance(username,newDistance);
-    }
-
-    @RequestMapping("/getDistance")
-    public double getDistance(@RequestParam("username") String username)
-    {
-        return users.getDistance(username);
+        return users.addFriend(username, newFriend);
     }
 
     @RequestMapping("/getFriends")
     public String getFriends(@RequestParam(value="username") String username)
     {
         return users.getFriendsList(username);
+    }
+
+    @RequestMapping("/addDistance")
+    public  void setDistance(@RequestParam("username") String username,@RequestParam(value="newDistance") double newDistance)
+    {
+        users.addDistance(username,newDistance);
+    }
+    @RequestMapping("/getDistance")
+    public double getDistance(@RequestParam("username") String username)
+    {
+        return users.getDistance(username);
     }
 
 
