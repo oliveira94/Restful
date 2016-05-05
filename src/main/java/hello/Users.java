@@ -36,6 +36,25 @@ public class Users {
         }
     }
 
+
+    //function to add kilometers on the database
+    public void setKilometers(String username , double Kilometers)
+    {
+        if (accounts.containsKey(username))
+        {
+            double aux= accounts.get(username).getKilometers();
+            aux+= Kilometers;
+            accounts.get(username).setKilometers(aux);
+        }else {System.err.println("Wrong operation");}
+    }
+
+    public double getKilometers(String username)
+    {
+        return accounts.get(username).getKilometers();
+    }
+
+
+
     //Function to add points to the user account
     public void addPoints(String username, int newPoints)
     {

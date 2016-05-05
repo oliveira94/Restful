@@ -52,6 +52,17 @@ public class Handler {
     {
         return users.getProfile(username);
     }
+    @RequestMapping("/setKilometers")
+    public  void setKilometers(@RequestParam("username") String username,@RequestParam(value="kilometers") double Kilometers)
+    {
+        users.setKilometers(username,Kilometers);
+    }
+
+    @RequestMapping("/getKilometers")
+    public double getKilometers(@RequestParam("username") String username)
+    {
+        return users.getKilometers(username);
+    }
 
     @RequestMapping("/getFriends")
     public String getFriends(@RequestParam(value="username") String username)
