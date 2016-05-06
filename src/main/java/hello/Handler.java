@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 @RestController
@@ -84,5 +86,34 @@ public class Handler {
         return users.getHistory(username);
     }
 
+    @RequestMapping("/actProfile")
+    public String actProfile(@RequestParam("username") String username, @RequestParam("points") int points,
+                             @RequestParam("distance") double totalDistance, @RequestParam("history") String history)
+    {
+        return users.actProfile(username, points, totalDistance, history);
+    }
 
+    @RequestMapping("/receivedPoints")
+    public String receivedPoints(@RequestParam("username") String username, @RequestParam("sender") String sender,
+                                 @RequestParam("points") int points, @RequestParam("mac") byte[] mac) throws NoSuchAlgorithmException, InvalidKeyException {
+        return users.receivedPoints(username, sender, points, mac);
+    }
+
+    @RequestMapping("listBikes")
+    public String listBikes()
+    {
+        return users.listBikes();
+    }
+
+    @RequestMapping("/BookBike")
+    public String bookBike(@RequestParam("username") String username, @RequestParam("bike") String bike)
+    {
+        return users.bookBike(username, bike);
+    }
+
+    @RequestMapping("cancelBookBike")
+    public void cancelBookBike(@RequestParam("username") String username)
+    {
+        users.cancelBookBike(username);
+    }
 }

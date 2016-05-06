@@ -3,11 +3,17 @@ package hello;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import org.omg.CORBA.NameValuePair;
 import org.omg.CORBA.Object;
 
+import javax.crypto.Mac;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import java.lang.reflect.Array;
 import java.lang.reflect.Type;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class userInformation {
@@ -16,16 +22,31 @@ public class userInformation {
     private String age;
     private String password;
     private int points = 0;
+    private int authorizedPoints = 0;
     private double distance = 0;
     private ArrayList<Object> history = new ArrayList<>();
     private ArrayList<String> friendsList = new ArrayList<>();
-    Gson gson = new Gson();
+    private Gson gson = new Gson();
+    private SecretKey secretKey;
+    private String bike = "noBike";
 
 
     public userInformation(String password, String name, String age) {
         this.name = name;
         this.age = age;
         this.password = password;
+        byte[] encoded = (password + name + age).getBytes();
+        secretKey = new SecretKeySpec(encoded, "HmacMD5");
+    }
+
+    public void setBike(String bike)
+    {
+        this.bike = bike;
+    }
+
+    public String getBike()
+    {
+        return bike;
     }
 
     public String getAge() {
@@ -39,6 +60,17 @@ public class userInformation {
     public void addPoints(int newPoints)
     {
         points += newPoints;
+        authorizedPoints += newPoints;
+    }
+
+    public void subtractPoints(int points)
+    {
+        this.points -= points;
+    }
+
+    public void setPoints(int points)
+    {
+        this.points = points;
     }
 
     public int getPoints()
@@ -98,7 +130,7 @@ public class userInformation {
         HashMap userData = new HashMap();
         userData.put("name", name);
         userData.put("age", age);
-        userData.put("points", String.valueOf(points));
+        userData.put("points", String.valueOf(authorizedPoints));
         userData.put("distance", String.valueOf(distance));
         userData.put("history", history);
         userData.put("friendsList", friendsList);
@@ -106,6 +138,12 @@ public class userInformation {
         return gson.toJson(userData);
     }
 
+    public boolean verifyMAC(String message, byte[] macReceived) throws NoSuchAlgorithmException, InvalidKeyException {
+        Mac mac = Mac.getInstance(this.secretKey.getAlgorithm());
+        mac.init(this.secretKey);
+        if (Arrays.equals(mac.doFinal(message.getBytes()), macReceived))
+            return true;
+        else
+            return false;
+    }
 }
-
-//-Dspring.profiles.active=https
