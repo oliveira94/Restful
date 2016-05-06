@@ -18,7 +18,7 @@ public class Handler {
     //If it returns false   -> Username already exists!
     @RequestMapping("/create")
     public boolean createAccount(@RequestParam(value="username") String username, @RequestParam(value="name") String name,
-                          @RequestParam(value="age") int age, @RequestParam(value="password") String password)
+                          @RequestParam(value="age") String age, @RequestParam(value="password") String password)
     {
         return users.createAccount(username, password, name, age);
     }
@@ -30,7 +30,7 @@ public class Handler {
     }
 
     @RequestMapping("/getProfile")
-    public userInformation getProfile(@RequestParam(value="username") String username)
+    public String getProfile(@RequestParam(value="username") String username)
     {
         return users.getProfile(username);
     }
@@ -50,6 +50,8 @@ public class Handler {
     @RequestMapping("/addFriend")
     public String addFriend(@RequestParam(value="username") String username, @RequestParam(value="newFriend") String newFriend)
     {
+        if (username.equals(newFriend))
+            return "yourself";
         return users.addFriend(username, newFriend);
     }
 
@@ -68,6 +70,18 @@ public class Handler {
     public double getDistance(@RequestParam("username") String username)
     {
         return users.getDistance(username);
+    }
+
+    @RequestMapping("/setHistory")
+    public void setHistory(@RequestParam("username") String username, @RequestParam("history") String history)
+    {
+        users.setHistory(username, history);
+    }
+
+    @RequestMapping("/getHistory")
+    public String getHistory(@RequestParam("username") String username)
+    {
+        return users.getHistory(username);
     }
 
 

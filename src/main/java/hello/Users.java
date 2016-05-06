@@ -9,7 +9,7 @@ public class Users {
     private HashMap<String, userInformation> accounts = new HashMap<>();
 
 
-    public boolean createAccount(String username, String password, String name, int age)
+    public boolean createAccount(String username, String password, String name, String age)
     {
         if (!accounts.containsKey(username))
         {
@@ -74,17 +74,14 @@ public class Users {
     public String addFriend(String username, String newFriend)
     {
         if(accounts.containsKey(newFriend))
-        {
-            accounts.get(username).addFriend(newFriend);
-            return "true";
-        }
+            return accounts.get(username).addFriend(newFriend);
         else
             return "false";
     }
 
-    public userInformation getProfile(String username)
+    public String getProfile(String username)
     {
-        return accounts.get(username);
+        return accounts.get(username).getProfile();
     }
 
     public String logIn(String username)
@@ -108,4 +105,13 @@ public class Users {
         return accounts.get(username).getFriendsList();
     }
 
+    public void setHistory(String username, String history)
+    {
+        accounts.get(username).setHistory(history);
+    }
+
+    public String getHistory(String username)
+    {
+        return accounts.get(username).getHistory();
+    }
 }
