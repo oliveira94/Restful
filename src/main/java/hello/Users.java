@@ -175,4 +175,9 @@ public class Users {
 
     }
 
+    public void addDistance(String username, String distance)
+    {
+        accounts.get(username).addDistance(distance);
+    }
+
 }

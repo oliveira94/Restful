@@ -146,4 +146,10 @@ public class userInformation {
         else
             return false;
     }
+
+    public void addDistance(String distance)
+    {
+        double newDistance = Double.valueOf(distance);
+        this.distance += newDistance;
+    }
 }
