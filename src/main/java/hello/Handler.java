@@ -63,11 +63,7 @@ public class Handler {
         return users.getFriendsList(username);
     }
 
-    @RequestMapping("/addDistance")
-    public  void setDistance(@RequestParam("username") String username,@RequestParam(value="newDistance") double newDistance)
-    {
-        users.addDistance(username,newDistance);
-    }
+
     @RequestMapping("/getDistance")
     public double getDistance(@RequestParam("username") String username)
     {
@@ -121,5 +117,12 @@ public class Handler {
     public void addDistance(@RequestParam("username") String username, @RequestParam("newDistance") String distance)
     {
         users.addDistance(username, distance);
+    }
+
+    @RequestMapping("/updateProfile")
+    public String updateProfile(@RequestParam(value="username") String username,@RequestParam(value="points") int points,
+                                @RequestParam(value="totaldistance") double totaldistance)
+    {
+        return users.updateProfile(username, points, totaldistance);
     }
 }
