@@ -177,4 +177,10 @@ public class Users {
         accounts.get(username).addDistance(distance);
     }
 
+    public String updateProfile(String username, int points, double totaldistance){
+        accounts.get(username).setPoints(points);
+        accounts.get(username).setDistance(totaldistance);
+        return "success";
+    }
+
 }

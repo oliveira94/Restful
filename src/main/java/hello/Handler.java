@@ -107,4 +107,11 @@ public class Handler {
     {
         users.addDistance(username, distance);
     }
+
+    @RequestMapping("/updateProfile")
+    public String updateProfile(@RequestParam(value="username") String username,@RequestParam(value="points") int points,
+                                @RequestParam(value="totaldistance") double totaldistance)
+    {
+        return users.updateProfile(username, points, totaldistance);
+    }
 }
