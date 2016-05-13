@@ -63,11 +63,7 @@ public class Handler {
         return users.getFriendsList(username);
     }
 
-    @RequestMapping("/addDistance")
-    public  void setDistance(@RequestParam("username") String username,@RequestParam(value="newDistance") double newDistance)
-    {
-        users.addDistance(username,newDistance);
-    }
+
     @RequestMapping("/getDistance")
     public double getDistance(@RequestParam("username") String username)
     {
@@ -99,22 +95,11 @@ public class Handler {
         return users.receivedPoints(username, sender, points, mac);
     }
 
-    @RequestMapping("/listBikes")
-    public String listBikes()
-    {
-        return users.listBikes();
-    }
 
     @RequestMapping("/BookBike")
-    public String bookBike(@RequestParam("username") String username, @RequestParam("bike") String bike)
+    public String bookBike(@RequestParam("username") String username, @RequestParam("station") String station)
     {
-        return users.bookBike(username, bike);
-    }
-
-    @RequestMapping("/cancelBookBike")
-    public void cancelBookBike(@RequestParam("username") String username)
-    {
-        users.cancelBookBike(username);
+        return users.bookBike(username, station);
     }
 
     @RequestMapping("/addDistance")

@@ -10,44 +10,41 @@ import java.util.HashMap;
 
 public class Users {
 
-    private final int NUMBER_OF_BIKES = 20;
     private HashMap<String, userInformation> accounts = new HashMap<>();
-    private HashMap<String, String> bikes = new HashMap<>();
+    private HashMap<String, Integer> bikes = new HashMap<>();
     private Gson gson = new Gson();
 
     public Users()
     {
-        for (int i = 0; i < NUMBER_OF_BIKES; i++)
-            bikes.put("bike" + i, "Available");
+        bikes.put("Alameda", 20);
+        bikes.put("Alvalade", 20);
+        bikes.put("Benfica", 20);
     }
 
-    public String bookBike(String username, String bike)
+    public String bookBike(String username, String station)
     {
-        if (bikes.get(bike).equals("Available"))
+        if (accounts.get(username).getBike())
         {
-            accounts.get(username).setBike(bike);
-            bikes.replace(bike, "Booked");
-            return "Booked";
+            int bikesAvailable = bikes.get(station);
+            bikesAvailable++;
+            bikes.replace(station, bikesAvailable);
+            accounts.get(username).cancelBike();
+            return "Canceled";
         }
         else
-            return "Busy";
-    }
-
-    public String listBikes()
-    {
-        ArrayList<String> result = new ArrayList<>();
-        for(int i = 0; i < bikes.size(); i++)
         {
-            if (bikes.get("bike"+i).equals("Available"))
-                result.add("bike"+i);
+            int bikesAvailable = bikes.get(station);
+            if (bikesAvailable > 0)
+            {
+                accounts.get(username).bookBike();
+                bikesAvailable--;
+                bikes.replace(station, bikesAvailable);
+                return "Booked";
+            }
+            else
+                return "Busy";
         }
-        return gson.toJson(result);
-    }
 
-    public void cancelBookBike(String username)
-    {
-        bikes.replace(accounts.get(username).getBike(), "Available");
-        accounts.get(username).setBike("noBike");
     }
 
     public boolean createAccount(String username, String password, String name, String age)

@@ -28,7 +28,7 @@ public class userInformation {
     private ArrayList<String> friendsList = new ArrayList<>();
     private Gson gson = new Gson();
     private SecretKey secretKey;
-    private String bike = "noBike";
+    private boolean bike = false;
 
 
     public userInformation(String password, String name, String age) {
@@ -39,12 +39,17 @@ public class userInformation {
         secretKey = new SecretKeySpec(encoded, "HmacMD5");
     }
 
-    public void setBike(String bike)
+    public void bookBike()
     {
-        this.bike = bike;
+        bike = true;
     }
 
-    public String getBike()
+    public void cancelBike()
+    {
+        bike = false;
+    }
+
+    public boolean getBike()
     {
         return bike;
     }
